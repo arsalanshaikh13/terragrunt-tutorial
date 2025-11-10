@@ -1,6 +1,0 @@
-vpc_cidr            = "10.100.0.0/16"
-public_subnet_cidr  = "10.100.1.0/24"
-private_subnet_cidr = "10.100.3.0/24"
-# bucket_name = "s3-backend-tutorial-terragrunt"
-# dynamodb_table = "dynanmo-state-lock"
-region = "us-east-1"

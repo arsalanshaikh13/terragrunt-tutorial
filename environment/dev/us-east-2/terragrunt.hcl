@@ -15,11 +15,15 @@ terraform {
       "plan",
       "import",
       "push",
-      "refresh"
+      "refresh",
+      "destroy"
     ]
 
     # required_var_files = ["${get_parent_terragrunt_dir()}/common.tfvars"]
-    required_var_files = ["terraform.tfvars"]
+    # required_var_files = ["terraform.tfvars"]
+    # required_var_files = ["${get_parent_terragrunt_dir()}/configuration/dev/us-east-1/network/network.tfvars"]
+    required_var_files = ["${get_parent_terragrunt_dir()}/configuration/${basename(dirname(get_terragrunt_dir()))}/${basename(get_terragrunt_dir())}/network/network.tfvars"]
+
   }
 
   # The following are examples of how to specify hooks
@@ -38,6 +42,6 @@ terraform {
     run_on_error = true
   }
 }
-# TG_PROVIDER_CACHE=1 terragrunt run --non-interactive --all --  plan -auto-approve
+# TG_PROVIDER_CACHE=1 terragrunt run --non-interactive --all --  plan 
 # TG_PROVIDER_CACHE=1 terragrunt run --non-interactive --all --  apply -auto-approve
 # TG_PROVIDER_CACHE=1 terragrunt run --non-interactive --all --  destroy -auto-approve
