@@ -5,16 +5,16 @@ terraform {
       version = "~> 5.0"
     }
   }
-
-  backend  "s3"{
-    bucket         = "s3-backend-tutorial-terragrunt"
-    key            = "tutorial/network.tfstate"
-    region         = "us-east-1"
-    dynamodb_table = "dynanmo-state-lock"
-    encrypt        = true
-    use_lockfile   = true
-  }
 }
+#   backend  "s3"{
+#     bucket         = "s3-backend-tutorial-terragrunt"
+#     key            = "tutorial/network.tfstate"
+#     region         = "us-east-1"
+#     dynamodb_table = "dynanmo-state-lock"
+#     encrypt        = true
+#     use_lockfile   = true
+#   }
+# }
 
 # Configure the AWS Provider
 provider "aws" {
