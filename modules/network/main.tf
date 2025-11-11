@@ -122,15 +122,4 @@ resource "aws_route_table_association" "private-rtb-assoc" {
   route_table_id = aws_route_table.private-rtb.id
 }
 
-data "aws_availability_zones" "available" {
-  state = "available"
-  filter {
-    name   = "zone-type"
-    values = ["availability-zone"]
-  }
-}
-
-output "availability_zone_names" {
-  value = data.aws_availability_zones.available.names
-}
 
