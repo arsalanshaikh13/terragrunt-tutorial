@@ -6,7 +6,13 @@ include "root" {
 
 terraform {
   # source = "../../../../modules/app"
-  source = "${get_parent_terragrunt_dir()}/modules/app"
+  # source = "${get_parent_terragrunt_dir()}/modules/app"
+    # sourcing from terraform registry gitlab module
+  # source = "tfr://gitlab.com/arsalanshaikh13/tf-modules/aws//app?version=0.0.8"
+
+    # source = "git::https://gitlab.com/arsalanshaikh13/tf-modules.git//modules/app?ref=main"
+    source = "git::ssh://git@gitlab.com/arsalanshaikh13/tf-modules.git//modules/app?ref=main"
+
 
    # You can also specify multiple extra arguments for each use case. Here we configure terragrunt to always pass in the
   # `common.tfvars` var file located by the parent terragrunt config.

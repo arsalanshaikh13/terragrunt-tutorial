@@ -6,7 +6,14 @@ include "root" {
 
 terraform {
   # source = "../../../../modules/network"
-  source = "${get_parent_terragrunt_dir()}/modules/network"
+  # source = "${get_parent_terragrunt_dir()}/modules/network"
+    # sourcing from terraform registry gitlab module
+  # source = "tfr://gitlab.com/arsalanshaikh13/tf-modules/aws//network?version=0.0.8"
+
+  source = "git::https://gitlab.com/arsalanshaikh13/tf-modules.git//modules/network?ref=main"
+    # source = "git::ssh://git@gitlab.com/arsalanshaikh13/tf-modules.git//modules/network?ref=main"
+
+
 
    # You can also specify multiple extra arguments for each use case. Here we configure terragrunt to always pass in the
   # `common.tfvars` var file located by the parent terragrunt config.
@@ -41,6 +48,13 @@ terraform {
     run_on_error = true
   }
 }
+
+# When applying this terragrunt config in an `run --all` command, make sure the modules at "../vpc" and "../rds" are
+# handled first.
+dependencies {
+  paths = ["../backend"]
+}
+
 # TG_PROVIDER_CACHE=1 terragrunt run --non-interactive --all --  plan 
 # TG_PROVIDER_CACHE=1 terragrunt run --non-interactive --all --  apply -auto-approve
 # TG_PROVIDER_CACHE=1 terragrunt run --non-interactive --all --  destroy -auto-approve
