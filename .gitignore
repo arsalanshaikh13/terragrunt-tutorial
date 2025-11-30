@@ -3,3 +3,4 @@
 **.terraform.lock*
 **/.terragrunt-cache/**
 notes.txt
+modules/**

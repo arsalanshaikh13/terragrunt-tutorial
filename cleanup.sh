@@ -3,27 +3,28 @@ set -euo pipefail
 
 destroy_resources () {
 
-    # destroy_order=(
-    # "app"
-    # "network" 
-    # "backend"
-    # )
+    destroy_order=(
+    "app"
+    "network" 
+    "backend"
+    )
 
 
-    # echo "🔥 Destroying stacks sequentially..."
+    echo "🔥 Destroying stacks sequentially..."
 
-    # for dir in "${destroy_order[@]}"; do
-    # echo "🧨 Destroying $dir..."
+    for dir in "${destroy_order[@]}"; do
+    echo "🧨 Destroying $dir..."
     
-    # TG_PROVIDER_CACHE=1 terragrunt run \
-    #     --non-interactive \
-    #     --working-dir "$dir" \
-    #     -- destroy -auto-approve --parallelism 20 
-    # done
-
-    rm -rf app/.terragrunt-cache app/.terraform.lock.hcl
-    rm -rf network/.terragrunt-cache network/.terraform.lock.hcl
-    rm -rf backend/.terragrunt-cache backend/.terraform.lock.hcl
+    TG_PROVIDER_CACHE=1 terragrunt run \
+        --non-interactive \
+        --working-dir "$dir" \
+        -- destroy -auto-approve --parallelism 20 
+    done
+    find . -type f -name ".terragrunt-cache" -prune -print -exec rm -f {} \;
+    find . -type f -name ".terraform.lock.hcl" -prune -print -exec rm -f {} \;
+    # rm -rf app/.terragrunt-cache app/.terraform.lock.hcl
+    # rm -rf network/.terragrunt-cache network/.terraform.lock.hcl
+    # rm -rf backend/.terragrunt-cache backend/.terraform.lock.hcl
 }
 
 #!/usr/bin/env bash
